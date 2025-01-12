@@ -3,7 +3,6 @@ config();
 
 import { DataSource, DataSourceOptions } from 'typeorm';
 
-
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -11,9 +10,12 @@ export const dataSourceOptions: DataSourceOptions = {
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DATABASE,
-  entities: [__dirname + '/../**/*.entity{.ts,.js}'],
+  entities: [__dirname + '/../**/*.entity{.ts,.js}'],  // Adjust if necessary
+  migrations: [__dirname + './../migrations/**/*{.ts,.js}'],  // Adjust if necessary
   synchronize: false,
+  logging: true,
 };
+console.log('__dirname', __dirname + './migrations/**/*{.ts,.js}');
 
 const dataSource = new DataSource(dataSourceOptions);
 
