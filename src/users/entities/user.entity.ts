@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { Roles } from 'src/utility/common/user-roles.enum';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Roles } from '../../utility/common/user-roles.enum';
+import { OrderEntity } from '../../orders/entities/order.entity';
+import { CategoryEntity } from '../../categories/entities/category.entity';
 
 @Entity('users')
 export class UserEntity {
@@ -20,4 +22,13 @@ export class UserEntity {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @OneToMany(() => OrderEntity, (order: OrderEntity) => order.user)
+  orders: OrderEntity[];
+
+  @OneToMany(() => OrderEntity, (order: OrderEntity) => order.updatedBy)
+  ordersUpdateBy: OrderEntity[];
+
+  @OneToMany(() => CategoryEntity, (category: CategoryEntity) => category.id)
+  categories: CategoryEntity[];
 }

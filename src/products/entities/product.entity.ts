@@ -1,7 +1,5 @@
-import { CategoryEntity } from 'src/categories/entities/category.entity';
-import { OrdersProductsEntity } from 'src/orders/entities/orders-products.entity';
-import { ReviewEntity } from 'src/reviews/entities/review.entity';
-import { UserEntity } from 'src/users/entities/user.entity';
+import { CategoryEntity } from '../../categories/entities/category.entity';
+import { OrdersProductsEntity } from '../../orders/entities/orders-products.entity';
 import {
   Column,
   CreateDateColumn,
@@ -12,6 +10,7 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from '../../users/entities/user.entity';
 
 @Entity({ name: 'products' })
 export class ProductEntity {
@@ -39,15 +38,12 @@ export class ProductEntity {
   @UpdateDateColumn()
   updatedAt: Timestamp;
 
-  @ManyToOne(() => UserEntity, (user) => user.products)
+  @ManyToOne(() => UserEntity, { eager: true })
   addedBy: UserEntity;
 
-  @ManyToOne(() => CategoryEntity, (cat) => cat.products)
+  @ManyToOne(() => CategoryEntity, { eager: true })
   category: CategoryEntity;
 
-  @OneToMany(() => ReviewEntity, (rev) => rev.product)
-  reviews: ReviewEntity[];
-
-  @OneToMany(() => OrdersProductsEntity, (op) => op.product)
+  @OneToMany(() => OrdersProductsEntity, (orderProduct) => orderProduct.product)
   products: OrdersProductsEntity[];
 }

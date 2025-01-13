@@ -10,12 +10,13 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { Repository } from 'typeorm';
-import { CategoriesService } from 'src/categories/categories.service';
-import { UserEntity } from 'src/users/entities/user.entity';
-import { OrderStatus } from 'src/orders/enums/order-status.enum';
-import dataSource from 'db/data-source';
-import { OrdersService } from 'src/orders/orders.service';
+import { CategoriesService } from '../categories/categories.service';
+import { OrdersService } from '../orders/orders.service';
+import { UserEntity } from '../users/entities/user.entity';
+import { OrderStatus } from '../orders/enums/order-status.enum';
+import dataSource from '../../database/data-sources';
 
+@Injectable()
 @Injectable()
 export class ProductsService {
   constructor(

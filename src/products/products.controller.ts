@@ -9,14 +9,15 @@ import {
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
-import { AuthenticationGuard } from 'src/utility/guards/authentication.guard';
-import { AuthorizeGuard } from 'src/utility/guards/authorization.guard';
-import { Roles } from 'src/utility/common/user-roles.enum';
-import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
-import { UserEntity } from 'src/users/entities/user.entity';
-import { ProductEntity } from './entities/product.entity';
-import { SerializeIncludes } from 'src/utility/interceptors/serialize.interceptor';
+
 import { ProductsDto } from './dto/products.dto';
+import { AuthenticationGuard } from '../utility/guards/authentication.guard';
+import { CurrentUser } from '../utility/decorators/current-user.decorator';
+import { UserEntity } from '../users/entities/user.entity';
+import { ProductEntity } from './entities/product.entity';
+import { SerializeIncludes } from '../utility/interceptors/serialize.interceptor';
+import { Roles } from '../utility/common/user-roles.enum';
+import { AuthorizeGuard } from '../utility/guards/authorization.guard';
 
 @Controller('products')
 export class ProductsController {

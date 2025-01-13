@@ -14,11 +14,10 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserSignUpDto } from './dto/user-signup.dto';
 import { UserEntity } from './entities/user.entity';
 import { UserSignInDto } from './dto/user-signin.dto';
-import { CurrentUser } from 'src/utility/decorators/current-user.decorator';
-import { AuthenticationGuard } from 'src/utility/guards/authentication.guard';
-import { AuthorizeRoles } from 'src/utility/decorators/authorize-roles.decorator';
-import { Roles } from 'src/utility/common/user-roles.enum';
-import { AuthorizeGuard } from 'src/utility/guards/authorization.guard';
+import { AuthenticationGuard } from '../utility/guards/authentication.guard';
+import { AuthorizeGuard } from '../utility/guards/authorization.guard';
+import { CurrentUser } from '../utility/decorators/current-user.decorator';
+import { Roles } from '../utility/common/user-roles.enum';
 
 @Controller('users')
 export class UsersController {
@@ -41,10 +40,9 @@ export class UsersController {
 
     return { accessToken, user };
   }
-
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return 'create';
+    return this.usersService.create(createUserDto);
   }
 
   @UseGuards(AuthenticationGuard, AuthorizeGuard([Roles.ADMIN]))

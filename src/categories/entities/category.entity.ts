@@ -1,5 +1,4 @@
-import { ProductEntity } from 'src/products/entities/product.entity';
-import { UserEntity } from 'src/users/entities/user.entity';
+import { ProductEntity } from '../../products/entities/product.entity';
 import {
   Column,
   CreateDateColumn,
@@ -10,6 +9,7 @@ import {
   Timestamp,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from '../../users/entities/user.entity';
 
 @Entity({ name: 'categories' })
 export class CategoryEntity {
